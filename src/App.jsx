@@ -1,3 +1,12 @@
-function App() {}
+import Game from "./components/Game";
 
-export default App;
+
+
+export default function App() {
+    
+    return (
+        <>
+            <Game></Game>
+        </>
+    )
+}
