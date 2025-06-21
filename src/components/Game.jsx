@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useRef, useState, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import InitialCardList from "./InitialCardList";
 import './GameStyle.css'
