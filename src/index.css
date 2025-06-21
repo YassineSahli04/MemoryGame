@@ -334,3 +334,16 @@ header h1 {
     transform: translateY(0);
   }
 }
+@font-face {
+  font-family: 'GamePaused';
+  src: url('./assets/fonts/Game Paused DEMO.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PixelPurl';
+  src: url('./assets/fonts/PixelPurl.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
