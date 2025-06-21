@@ -24,8 +24,13 @@ export default function Game(){
 
     useEffect(()=>{
         if(view === 'next'){
-            setImgNumber(prev => prev + 1)
-            setView('cards')
+            if(imgNumber === Items.length){
+                setView('win')
+            }else{
+                setImgNumber(prev => prev + 1)
+                setView('cards')
+            }
+
         }
     },[view])
 
@@ -37,6 +42,10 @@ export default function Game(){
 
         {view === 'results' && (
             <CardProposition numberCards={2} items={selectedItems} result={handleResult}/>
+        )}
+
+        {view === 'win' && (
+            <h1>You Won</h1>
         )}
 
         {view === 'end' && (
