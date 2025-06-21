@@ -1,0 +1,93 @@
+@font-face {
+  font-family: 'GamePaused';
+  src: url('./assets/fonts/GamePaused.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'PixelPurl';
+  src: url('./assets/fonts/PixelPurl.ttf') format('truetype');
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 75vh;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.game-font {
+  font-family: 'GamePaused', sans-serif;
+  font-size: 3rem;
+  color: #00ffe7;
+}
+
+.subtitle {
+  font-family: 'PixelPurl', sans-serif;
+  font-size: 1.5rem;
+  color: #ccc;
+  margin-bottom: 1rem;
+  margin-top: -2rem;;
+}
+
+.level-label {
+  font-family: 'PixelPurl', sans-serif;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.level-buttons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.level-button {
+  font-family: 'PixelPurl', sans-serif;
+  font-size: 1.2rem;
+  padding: 12px 24px;
+  border: 2px solid #00ffe7;
+  background: transparent;
+  color: #00ffe7;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 100px;
+}
+
+.level-button:hover {
+  background-color: #00ffe7;
+  color: #0d0d0d;
+}
+
+.easy {
+  border-color: #5cff9d;
+  color: #5cff9d;
+}
+.easy:hover {
+  background: #5cff9d;
+  color: #0d0d0d;
+}
+
+.medium {
+  border-color: #ffd447;
+  color: #ffd447;
+}
+.medium:hover {
+  background: #ffd447;
+  color: #0d0d0d;
+}
+
+.hard {
+  border-color: #ff4e4e;
+  color: #ff4e4e;
+}
+.hard:hover {
+  background: #ff4e4e;
+  color: #0d0d0d;
+}
