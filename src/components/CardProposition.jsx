@@ -4,24 +4,26 @@ import "./GameStyle.css"
 
 export default function CardProposition({numberCards, items, result}){
     
-    const [question, selectedItem] = useMemo(() => {
+    const [randomIndex, question, selectedItem, proposedItem] = useMemo(() => {
         const randomIndex = Math.floor(Math.random() * items.length);
         const question = `What was the image at position ${randomIndex + 1}?`;
         const selectedItem = items[randomIndex];
-        return [question, selectedItem];
+        const shuffledItems = items.filter((_, index) => index !== randomIndex).sort(() => Math.random() - 0.5);
+        const choices = shuffledItems.slice(0, numberCards - 1);
+        const insertAt = Math.floor(Math.random() * (choices.length + 1));
+        choices.splice(insertAt, 0, selectedItem);
+        return [randomIndex, question, selectedItem, choices];
     }, [items]);
     
     const [flippedStates, setFlippedStates] = useState(
         new Array(numberCards).fill(false)
-    );    
+    );
+    
+    
 
-    const shuffledItems = [...items].sort(() => Math.random() - 0.5);
-    var selectedItems = shuffledItems.slice(0, numberCards-1);
-    const randomInsertingIndex = Math.floor(Math.random() * (items.length + 1));
-    selectedItems.splice(randomIndex, 0, newItem);
 
     useEffect(()=>{
-        selectedItems.forEach((_,i)=>{
+        proposedItem.forEach((_,i)=>{
             setTimeout(()=>{
                 setFlippedStates(prev => {
                     const updated = [...prev];
@@ -30,7 +32,7 @@ export default function CardProposition({numberCards, items, result}){
                 });
             },500+300*i)
         })
-    },[numberCards])
+    },[proposedItem])
 
     function handleCardClick(id){
         if(id === selectedItem.id){
@@ -46,7 +48,7 @@ export default function CardProposition({numberCards, items, result}){
         <>
             <h1>{question}</h1>
             <div className="cardContainer">
-                {selectedItems.map((item, index) => (
+                {proposedItem.map((item, index) => (
                     <div className="cardWrapper" key={index} onClick={() => handleCardClick(item.id)}>
                         <Card
                             showedItemSource={item.source}
