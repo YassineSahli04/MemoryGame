@@ -1,28 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import InitialCardList from "./InitialCardList";
 import './GameStyle.css'
 import CardProposition from "./CardProposition";
+import Items from "./Items";
 
 export default function Game(){
-    const items =[
-        {source:"https://upload.wikimedia.org/wikipedia/commons/3/32/Jebel_Rassas%2C_Ben_Arous%2C_Tunisia.jpg"},
-        {source:"https://www.les-voyageuses.net/wp-content/uploads/2018/09/les-voyageuses-tunisie-gammarth-950x640.jpg"},
-        {source:"https://upload.wikimedia.org/wikipedia/commons/3/32/Jebel_Rassas%2C_Ben_Arous%2C_Tunisia.jpg"},
-        // {source:"https://www.les-voyageuses.net/wp-content/uploads/2018/09/les-voyageuses-tunisie-gammarth-950x640.jpg"},
-        // {source:"https://upload.wikimedia.org/wikipedia/commons/3/32/Jebel_Rassas%2C_Ben_Arous%2C_Tunisia.jpg"},
-        // {source:"https://www.les-voyageuses.net/wp-content/uploads/2018/09/les-voyageuses-tunisie-gammarth-950x640.jpg"},
-    ]
     const [view, setView] = useState('cards');
+    const [imgNumber, setImgNumber] = useState(2)
 
+    const selectedItems = useMemo(()=>{
+        console.log('yes')
+        const shuffledItems = [...Items].sort(() => Math.random() - 0.5);  
+        return shuffledItems.slice(0, imgNumber);
+    },[Items, imgNumber]);
+
+    const handleResult = (result) =>{
+        if(result === true){
+            setView('next')
+        }else{
+            setView('end')
+        }
+    }
+
+    useEffect(()=>{
+        if(view === 'next'){
+            if(imgNumber === Items.length){
+                setView('win')
+            }else{
+                setImgNumber(prev => prev + 1)
+                setView('cards')
+            }
+
+        }
+    },[view])
 
     return (<>
     <div className="container">
         {view === 'cards' && (
-            <InitialCardList items={items} flipTimer={1500} onComplete={() => setView('results')}/>
+            <InitialCardList items={selectedItems} flipTimer={1500} onComplete={() => setView('results')}/>
         )}
 
         {view === 'results' && (
-            <CardProposition numberCards={3} items={items}/>
+            <CardProposition numberCards={2} items={selectedItems} result={handleResult}/>
+        )}
+
+        {view === 'win' && (
+            <h1>You Won</h1>
+        )}
+
+        {view === 'end' && (
+            <h1>This is the end</h1>
         )}
     </div>
     </>)
