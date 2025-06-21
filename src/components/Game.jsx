@@ -1,9 +1,10 @@
-import { useEffect, useState, useMemo } from "react";
+import { useRef, useState, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import InitialCardList from "./InitialCardList";
 import './GameStyle.css'
 import CardProposition from "./CardProposition";
 import Items from "./Items";
+import Summary from "./Summary";
 
 export default function Game(){
     const [searchParams] = useSearchParams();
@@ -22,38 +23,45 @@ export default function Game(){
 
 
     const [view, setView] = useState('cards');
-    const [imgNumber, setImgNumber] = useState(startingNumberImgs)
+    const [imgNumber, setImgNumber] = useState(startingNumberImgs);
+    const score = useRef(0);
+    const totalQuestions = useRef(1);
 
     const selectedItems = useMemo(()=>{
-        console.log('yes')
         const shuffledItems = [...Items].sort(() => Math.random() - 0.5);  
         return shuffledItems.slice(0, imgNumber);
     },[ imgNumber]);
 
     const handleResult = (result) =>{
+        totalQuestions.current += 1;
         if(result === true){
+            score.current += 1;
+        }
+        if(imgNumber === Items.length){
+            setView('summary')
+        }else{
             setImgNumber(prev => prev + 1)
             setView('cards')
-        }else{
-            setView('end')
         }
     }
 
 
 
     return (<>
-    <div className="container">
-        {view === 'cards' && (
-            <InitialCardList items={selectedItems} flipTimer={flipTimer} onComplete={() => setView('results')}/>
-        )}
+    {view !== 'summary' && (
+        <div className="container">
+            {view === 'cards' && (
+                <InitialCardList items={selectedItems} flipTimer={flipTimer} onComplete={() => setView('results')} />
+            )}
+            {view === 'results' && (
+                <CardProposition numberCards={numberCards} items={selectedItems} result={handleResult} />
+            )}
+            {view === 'end' && <h1>This is the end</h1>}
+        </div>
+    )}
 
-        {view === 'results' && (
-            <CardProposition numberCards={numberCards} items={selectedItems} result={handleResult}/>
+        {view === 'summary' && (
+            <Summary  score={score.current} totalQuestions={totalQuestions.current} />
         )}
-
-        {view === 'end' && (
-            <h1>This is the end</h1>
-        )}
-    </div>
-    </>)
+        </>)
 }
