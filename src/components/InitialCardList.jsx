@@ -46,7 +46,7 @@ export default function InitialCardList({items, flipTimer, onComplete}){
 
             const timer = setTimeout(() => {
                 setFade(false);
-            }, 300);
+            }, 500);
 
             return () => clearTimeout(timer);
         }
@@ -63,6 +63,12 @@ export default function InitialCardList({items, flipTimer, onComplete}){
     const showedItemSource = items[itemIndex].source;
     
     return (
-        <Card showedItemSource={showedItemSource} flipped={flipped}/>
+        <div className="initialCardList">
+            <h1>Memorize The Images!</h1>
+            <div className="oneCardWrapper">
+                <Card showedItemSource={showedItemSource} flipped={flipped}/>
+            </div> 
+        </div>
+        
     )
 }
