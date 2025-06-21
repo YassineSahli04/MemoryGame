@@ -1,7 +1,8 @@
 import quizCompletedImg from "../assets/quiz-complete.png"
 
-export default function Summary({isCompleted, score, totalQuestions}){
+export default function Summary({ score, totalQuestions}){
     var correctPerc = totalQuestions ? ((score * 100) / totalQuestions).toFixed(1) : "0.0";
+    const isCompleted = correctPerc >= 50 ? true : false;
     return(
         <div id="summary">
             <img src={quizCompletedImg} alt="Trophy Icon" />

@@ -9,36 +9,36 @@ export default function Game(){
     const [view, setView] = useState('cards');
     const [imgNumber, setImgNumber] = useState(2);
     const score = useRef(0);
+    const totalQuestions = useRef(1);
 
     const selectedItems = useMemo(()=>{
-        console.log('yes')
         const shuffledItems = [...Items].sort(() => Math.random() - 0.5);  
         return shuffledItems.slice(0, imgNumber);
     },[Items, imgNumber]);
 
     const handleResult = (result) =>{
         if(result === true){
-            setView('next')
+            score.current += 1;
+        }
+        if(imgNumber === Items.length){
+            console.log('yes')
+            setView('summary')
         }else{
-            setView('end')
+            setView('next')
         }
     }
 
     useEffect(()=>{
         if(view === 'next'){
-            score.current += 1;
-            if(imgNumber === Items.length){
-                setView('win')
-            }else{
-                setImgNumber(prev => prev + 1)
-                setView('cards')
-            }
+            totalQuestions.current += 1;
+            setImgNumber(prev => prev + 1);
+            setView('cards');
+        };
 
-        }
     },[view])
 
     return (<>
-    {view !== 'win' && (
+    {view !== 'summary' && (
         <div className="container">
             {view === 'cards' && (
                 <InitialCardList items={selectedItems} flipTimer={1500} onComplete={() => setView('results')} />
@@ -50,8 +50,8 @@ export default function Game(){
         </div>
     )}
 
-        {view === 'win' && (
-        <Summary isCompleted={true} score={score.current} totalQuestions={imgNumber} />
+        {view === 'summary' && (
+            <Summary  score={score.current} totalQuestions={totalQuestions.current} />
         )}
         </>)
 }
