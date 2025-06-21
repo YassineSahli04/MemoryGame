@@ -79,14 +79,20 @@ header h1 {
 }
 
 #quiz {
-  max-width: 50rem;
+    max-width: 50rem;
+  height: 100vh; /* full viewport height */
   margin: auto;
   padding: 2rem;
+ position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: linear-gradient(180deg, #3e2a60 0%, #321061 100%);
   border-radius: 8px;
   /* box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.6); */
   box-shadow: 1px 1px 8px 4px rgba(12, 5, 32, 0.6);
   text-align: center;
+  
 }
 
 #question-overview {
@@ -333,17 +339,4 @@ header h1 {
     opacity: 1;
     transform: translateY(0);
   }
-}
-@font-face {
-  font-family: 'GamePaused';
-  src: url('./assets/fonts/Game Paused DEMO.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'PixelPurl';
-  src: url('./assets/fonts/PixelPurl.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
 }

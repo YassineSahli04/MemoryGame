@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'GamePaused';
-  src: url('./assets/fonts/GamePaused.otf') format('opentype');
+  src: url('../assets/fonts/GamePausedDEMO.otf') format('opentype');
 }
 
 @font-face {
   font-family: 'PixelPurl';
-  src: url('./assets/fonts/PixelPurl.ttf') format('truetype');
+  src: url('../assets/fonts/PixelPurl.ttf') format('truetype');
 }
 
 .home-container {
