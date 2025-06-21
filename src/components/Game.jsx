@@ -1,12 +1,14 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import InitialCardList from "./InitialCardList";
 import './GameStyle.css'
 import CardProposition from "./CardProposition";
 import Items from "./Items";
+import Summary from "./Summary";
 
 export default function Game(){
     const [view, setView] = useState('cards');
-    const [imgNumber, setImgNumber] = useState(2)
+    const [imgNumber, setImgNumber] = useState(2);
+    const score = useRef(0);
 
     const selectedItems = useMemo(()=>{
         console.log('yes')
@@ -24,6 +26,7 @@ export default function Game(){
 
     useEffect(()=>{
         if(view === 'next'){
+            score.current += 1;
             if(imgNumber === Items.length){
                 setView('win')
             }else{
@@ -35,22 +38,20 @@ export default function Game(){
     },[view])
 
     return (<>
-    <div className="container">
-        {view === 'cards' && (
-            <InitialCardList items={selectedItems} flipTimer={1500} onComplete={() => setView('results')}/>
-        )}
-
-        {view === 'results' && (
-            <CardProposition numberCards={2} items={selectedItems} result={handleResult}/>
-        )}
+    {view !== 'win' && (
+        <div className="container">
+            {view === 'cards' && (
+                <InitialCardList items={selectedItems} flipTimer={1500} onComplete={() => setView('results')} />
+            )}
+            {view === 'results' && (
+                <CardProposition numberCards={2} items={selectedItems} result={handleResult} />
+            )}
+            {view === 'end' && <h1>This is the end</h1>}
+        </div>
+    )}
 
         {view === 'win' && (
-            <h1>You Won</h1>
+        <Summary isCompleted={true} score={score.current} totalQuestions={imgNumber} />
         )}
-
-        {view === 'end' && (
-            <h1>This is the end</h1>
-        )}
-    </div>
-    </>)
+        </>)
 }
