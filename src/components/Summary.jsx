@@ -1,6 +1,8 @@
 import quizCompletedImg from "../assets/quiz-complete.png"
+import { useNavigate } from 'react-router-dom';
 
 export default function Summary({ score, totalQuestions }) {
+    const navigate = useNavigate();
     var correctPerc = totalQuestions ? ((score * 100) / totalQuestions).toFixed(1) : "0.0";
     const isCompleted = correctPerc >= 50 ? true : false;
     return (
