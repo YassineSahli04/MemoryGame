@@ -1,9 +1,10 @@
 .card {
     width: 80%;
-    height: 70%;
+    height: 100%;
     perspective: 1000px;
     cursor: pointer;
     transition: opacity 0.3s ease;
+    padding:30px;
 }
 
 .card-inner {

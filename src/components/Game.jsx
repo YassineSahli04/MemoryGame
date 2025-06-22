@@ -12,14 +12,14 @@ export default function Game() {
     const [searchParams] = useSearchParams();
     const level = searchParams.get("level") || "easy";
 
-    const [flipTimer,numberCards,startingNumberImgs] = useMemo(() => {
+    const [flipTimer,numberCards,startingNumberImgs,timeLimit] = useMemo(() => {
         switch (level) {
             case "medium":
-                return [1500,2,3];
+                return [1500,2,3,10000];
             case "hard":
-                return [1000,3,4];
+                return [1000,3,4,5000];
             default:
-                return [2000,2,2]; 
+                return [2000,2,2, 15000]; 
         }
     }, [level]);
 
@@ -47,13 +47,13 @@ export default function Game() {
         }
     }
 
-    const handleSelectAnswer = (selectedId) => {
-        if (selectedId === null) {
-            setView('end');
-        } else {
-            setView('next')
-        }
-    };
+    // const handleSelectAnswer = (selectedId) => {
+    //     if (selectedId === null) {
+    //         setView('end');
+    //     } else {
+    //         setView('next')
+    //     }
+    // };
 
     return (<>
     {view !== 'summary' && (
@@ -64,9 +64,9 @@ export default function Game() {
             {view === 'results' && (
                 <>
                     <div className="question-timer-wrapper">
-                        <QuestionTimer timeout={10000} onTimeout={() => handleSelectAnswer(null)} />
+                        <QuestionTimer timeout={timeLimit} onTimeout={handleResult} />
                     </div>
-                    <CardProposition numberCards={2} items={selectedItems} result={handleResult} />
+                    <CardProposition numberCards={numberCards} items={selectedItems} result={handleResult} />
                 </>
             )}
             {view === 'end' && <h1>This is the end</h1>}
