@@ -4,22 +4,29 @@ import InitialCardList from "./InitialCardList";
 import './GameStyle.css'
 import '.././index.css';
 import CardProposition from "./CardProposition";
-import Items from "./Items";
+import ItemsNature from "./ItemsNature";
+import ItemsCity from "./ItemsCity";
 import QuestionTimer from "./QuestionTimer";
 import Summary from "./Summary";
 
 export default function Game() {
+    var Items = [];
     const [searchParams] = useSearchParams();
     const level = searchParams.get("level") || "easy";
-
-    const [flipTimer,numberCards,startingNumberImgs,timeLimit] = useMemo(() => {
+    const theme = searchParams.get("theme") || "nature";
+    if (theme== "nature") {
+        Items=ItemsNature;
+    } else if (theme === "city") {
+        Items=ItemsCity;
+    }
+    const [flipTimer,numberCards,startingNumberImgs,limitNumberImgs,timeLimit] = useMemo(() => {
         switch (level) {
             case "medium":
-                return [1500,2,3,10000];
+                return [1500,2,3,10,10000];
             case "hard":
-                return [1000,3,4,5000];
+                return [1000,3,4,15,5000];
             default:
-                return [2000,2,2, 15000]; 
+                return [2000,2,2,5,15000]; 
         }
     }, [level]);
 
@@ -39,9 +46,10 @@ export default function Game() {
         if(result === true){
             score.current += 1;
         }
-        if(imgNumber === Items.length){
+        if(imgNumber === limitNumberImgs){
             setView('summary')
-        }else{
+        }
+        else{
             setImgNumber(prev => prev + 1)
             setView('cards')
         }
@@ -69,7 +77,7 @@ export default function Game() {
                     <CardProposition numberCards={numberCards} items={selectedItems} result={handleResult} />
                 </>
             )}
-            {view === 'end' && <h1>This is the end</h1>}
+            {view === 'end'}
         </div>
     )}
 
