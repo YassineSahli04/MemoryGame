@@ -333,6 +333,25 @@ header h1 {
   letter-spacing: 0.1rem;
 }
 
+.try-again-button {
+  display: block;
+  font-family: 'PixelPurl', sans-serif;
+  font-size: 1.5rem;
+  margin: 2rem auto 0 auto;
+  padding: 12px 24px;
+  border: 2px solid #770fed;
+  background: transparent;
+  color: #770fed;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.try-again-button:hover {
+  background-color: #770fed;
+  color: #0d0d0d;
+}
+
 @keyframes slide-in-from-bottom {
   0% {
     opacity: 0;
