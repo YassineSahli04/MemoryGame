@@ -1,5 +1,5 @@
 .card {
-    width: 80%;
+    width: 70%;
     height: 100%;
     perspective: 1000px;
     cursor: pointer;
@@ -47,12 +47,16 @@
 }
 
 .card-back {
-    background-color: #6A14C7;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background-color: #8d5eb7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+  z-index: 1;
     border-radius: 8px;
     z-index: 1;
+
 }
 
 .fade-in {
