@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;700&display=swap');
-
+@font-face {
+  font-family: 'PixelPurl';
+  src: url('../assets/fonts/PixelPurl.ttf') format('truetype');
+}
 * {
   box-sizing: border-box;
 }
@@ -22,7 +25,7 @@ html {
 body {
   margin: 0;
   padding: 2rem;
-  /* background: linear-gradient(180deg, #22182f 0%, #2c2437 100%); */
+  background: linear-gradient(180deg, #22182f 0%, #2c2437 100%);
   background-color: #1d0433;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 400'%3E%3Cdefs%3E%3CradialGradient id='a' cx='396' cy='281' r='514' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%237616DD'/%3E%3Cstop offset='1' stop-color='%231D0433'/%3E%3C/radialGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='400' y1='148' x2='400' y2='333'%3E%3Cstop offset='0' stop-color='%2318E0FF' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%2318E0FF' stop-opacity='0.5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='800' height='400'/%3E%3Cg fill-opacity='0.4'%3E%3Ccircle fill='url(%23b)' cx='267.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='532.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='400' cy='30' r='300'/%3E%3C/g%3E%3C/svg%3E");
   background-attachment: fixed;
@@ -79,14 +82,20 @@ header h1 {
 }
 
 #quiz {
-  max-width: 50rem;
+    max-width: 50rem;
+  height: 100vh; /* full viewport height */
   margin: auto;
   padding: 2rem;
+ position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: linear-gradient(180deg, #3e2a60 0%, #321061 100%);
   border-radius: 8px;
   /* box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.6); */
   box-shadow: 1px 1px 8px 4px rgba(12, 5, 32, 0.6);
   text-align: center;
+  
 }
 
 #question-overview {
@@ -233,7 +242,7 @@ header h1 {
 }
 
 #summary h2 {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'PixelPurl', sans-serif;
   font-size: 3rem;
   text-align: center;
   margin: 0;
@@ -324,6 +333,25 @@ header h1 {
   letter-spacing: 0.1rem;
 }
 
+.try-again-button {
+  display: block;
+  font-family: 'PixelPurl', sans-serif;
+  font-size: 1.5rem;
+  margin: 2rem auto 0 auto;
+  padding: 12px 24px;
+  border: 2px solid #770fed;
+  background: transparent;
+  color: #770fed;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.try-again-button:hover {
+  background-color: #770fed;
+  color: #0d0d0d;
+}
+
 @keyframes slide-in-from-bottom {
   0% {
     opacity: 0;
@@ -333,17 +361,4 @@ header h1 {
     opacity: 1;
     transform: translateY(0);
   }
-}
-@font-face {
-  font-family: 'GamePaused';
-  src: url('./assets/fonts/Game Paused DEMO.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'PixelPurl';
-  src: url('./assets/fonts/PixelPurl.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
 }

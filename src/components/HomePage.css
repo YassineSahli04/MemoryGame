@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'GamePaused';
-  src: url('./assets/fonts/GamePaused.otf') format('opentype');
+  src: url('../assets/fonts/GamePausedDEMO.otf') format('opentype');
 }
 
 @font-face {
   font-family: 'PixelPurl';
-  src: url('./assets/fonts/PixelPurl.ttf') format('truetype');
+  src: url('../assets/fonts/PixelPurl.ttf') format('truetype');
 }
 
 .home-container {
@@ -21,13 +21,13 @@
 
 .game-font {
   font-family: 'GamePaused', sans-serif;
-  font-size: 3rem;
+  font-size: 5rem;
   color: #00ffe7;
 }
 
 .subtitle {
   font-family: 'PixelPurl', sans-serif;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   color: #ccc;
   margin-bottom: 1rem;
   margin-top: -2rem;;
@@ -35,7 +35,7 @@
 
 .level-label {
   font-family: 'PixelPurl', sans-serif;
-  font-size: 1.3rem;
+  font-size: 2.1rem;
   margin-bottom: 1rem;
   color: #fff;
 }
@@ -49,20 +49,32 @@
 
 .level-button {
   font-family: 'PixelPurl', sans-serif;
-  font-size: 1.2rem;
+  font-size: 2rem;
   padding: 12px 24px;
   border: 2px solid #00ffe7;
   background: transparent;
   color: #00ffe7;
   border-radius: 10px;
-  cursor: pointer;
   transition: all 0.3s ease;
   min-width: 100px;
 }
 
-.level-button:hover {
+/* .level-button:hover {
   background-color: #00ffe7;
   color: #0d0d0d;
+} */
+
+.level-disabled .level-button:hover {
+  background: transparent !important;
+  color: inherit !important;
+  cursor: not-allowed;
+}
+
+.level-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: transparent;
+  color: inherit;
 }
 
 .easy {
@@ -90,4 +102,60 @@
 .hard:hover {
   background: #ff4e4e;
   color: #0d0d0d;
+}
+
+.theme-buttons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.theme-button {
+  font-family: 'PixelPurl', sans-serif;
+  font-size: 2rem;
+  padding: 12px 24px;
+  border: 2px solid #00ffe7;
+  background: transparent;
+  color: #00ffe7;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+/* .theme-button:hover {
+  background-color: #00ffe7;
+  color: #0d0d0d;
+} */
+
+/* Specific themes */
+.theme-button.nature {
+  border-color: #7fff80;
+  color: #7fff80;
+}
+.theme-button.nature:hover {
+  background-color: #7fff80;
+  color: #0d0d0d;
+}
+
+.theme-button.city {
+  border-color: #06a4ff;
+  color: #06a4ff;
+}
+.theme-button.city:hover {
+  background-color: #06a4ff;
+  color: #0d0d0d;
+}
+
+.theme-button.selected.nature {
+  background-color: #7fff80;
+  color: #0d0d0d;
+  font-weight: bold;
+}
+.theme-button.selected.city {
+  background-color: #7fbfff;
+  color: #0d0d0d;
+  font-weight: bold;
 }

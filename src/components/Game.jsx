@@ -2,22 +2,31 @@ import { useRef, useState, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import InitialCardList from "./InitialCardList";
 import './GameStyle.css'
+import '.././index.css';
 import CardProposition from "./CardProposition";
-import Items from "./Items";
+import ItemsNature from "./ItemsNature";
+import ItemsCity from "./ItemsCity";
+import QuestionTimer from "./QuestionTimer";
 import Summary from "./Summary";
 
-export default function Game(){
+export default function Game() {
+    var Items = [];
     const [searchParams] = useSearchParams();
     const level = searchParams.get("level") || "easy";
-
-    const [flipTimer,numberCards,startingNumberImgs] = useMemo(() => {
+    const theme = searchParams.get("theme") || "nature";
+    if (theme== "nature") {
+        Items=ItemsNature;
+    } else if (theme === "city") {
+        Items=ItemsCity;
+    }
+    const [flipTimer,numberCards,startingNumberImgs,limitNumberImgs,timeLimit] = useMemo(() => {
         switch (level) {
             case "medium":
-                return [1500,2,3];
+                return [1500,2,3,10,10000];
             case "hard":
-                return [1000,3,4];
+                return [1000,3,4,15,5000];
             default:
-                return [2000,2,2]; 
+                return [2000,2,2,5,15000]; 
         }
     }, [level]);
 
@@ -37,15 +46,22 @@ export default function Game(){
         if(result === true){
             score.current += 1;
         }
-        if(imgNumber === Items.length){
+        if(imgNumber === limitNumberImgs){
             setView('summary')
-        }else{
+        }
+        else{
             setImgNumber(prev => prev + 1)
             setView('cards')
         }
     }
 
-
+    // const handleSelectAnswer = (selectedId) => {
+    //     if (selectedId === null) {
+    //         setView('end');
+    //     } else {
+    //         setView('next')
+    //     }
+    // };
 
     return (<>
     {view !== 'summary' && (
@@ -54,9 +70,14 @@ export default function Game(){
                 <InitialCardList items={selectedItems} flipTimer={flipTimer} onComplete={() => setView('results')} />
             )}
             {view === 'results' && (
-                <CardProposition numberCards={numberCards} items={selectedItems} result={handleResult} />
+                <>
+                    <div className="question-timer-wrapper">
+                        <QuestionTimer timeout={timeLimit} onTimeout={handleResult} />
+                    </div>
+                    <CardProposition numberCards={numberCards} items={selectedItems} result={handleResult} />
+                </>
             )}
-            {view === 'end' && <h1>This is the end</h1>}
+            {view === 'end'}
         </div>
     )}
 

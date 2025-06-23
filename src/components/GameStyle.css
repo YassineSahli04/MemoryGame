@@ -1,23 +1,37 @@
-.container{
-    width: 70%;
-    height: 700px;
-    max-width: 1200px;
-    background: #000000;
-    
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    padding: 20px;
+@font-face {
+  font-family: 'PixelPurl';
+  src: url('../assets/fonts/PixelPurl.ttf') format('truetype');
+}
 
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+.container {
+  width: 70%;
+  height: 700px;
+  max-width: 1200px;
+  background: linear-gradient(180deg, #3e2a60 0%, #321061 100%);
+  border-radius: 8px;
+  box-shadow: 1px 1px 8px 4px rgba(12, 5, 32, 0.6);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 10px;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 
 }
+
+h1{
+  font-family: 'PixelPurl', sans-serif;
+  font-size: 3.5rem;
+  text-align: center;
+  margin: 0;
+}
+
 .cardContainer {
   width: 100%;
   height: 100%;
@@ -26,32 +40,74 @@
   gap: 0px;
   justify-content: center;
   align-items: center;
+
 }
 
 .cardWrapper {
-  width: 45%;
+  width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0;
   padding: 0;
 }
-.initialCardList h1{
-  margin-top: 10px;
+
+.initialCardList h1 {
+  margin: 30px;
 }
+
 .initialCardList {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-}
-.oneCardWrapper {
   height: 100%;
-  width: 100%;
-    display: flex;
+  width:100%;
+  padding-top: 60x;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+}
+
+.oneCardWrapper {
+  height:100%;
+  width:100%;
+  flex: 1;
+  display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.question-timer-wrapper {
+  width: 80%;
+  max-width: 400px;
+}
+
+.question-timer-wrapper progress {
+  width: 100%;
+  height: 0.4rem;
+  /* make it taller */
+  border-radius: 24px;
+  background: #9e5ef8;
+  appearance: none;
+  /* helps with cross-browser styling */
+}
+
+.question-timer-wrapper progress::-webkit-progress-bar {
+  background: #6a558a;
+  border-radius: 24px;
+}
+
+.question-timer-wrapper progress::-webkit-progress-value {
+  background: #9e5ef8;
+  border-radius: 24px;
+}
+
+.question-timer-wrapper progress.answered {
+  background: #f8e59c;
+}
+
+.question-timer-wrapper progress.answered::-webkit-progress-value {
+  background: #f8e59c;
+}
+
+.question-timer-wrapper progress.answered::-webkit-progress-bar {
+  background: #6a558a;
 }
